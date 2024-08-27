@@ -28,7 +28,7 @@ app.get('/Cotizaciones', async (req, res) => {
     ))
     
     //DOLAR BLUE ALTERNATIVA
-    await page.goto('https://dolarhoy.com/i/cotizaciones/dolar-blue');    
+  /*  await page.goto('https://dolarhoy.com/i/cotizaciones/dolar-blue');    
     const dataBlue2 = await page.evaluate(() => 
                 {  let tipo         = document.querySelector("h2").innerText;         
                    const valores    = document.querySelectorAll("p") //Todos los p
@@ -36,7 +36,7 @@ app.get('/Cotizaciones', async (req, res) => {
                                                                            valor   : x.innerText.replace(/[^\d.-]/g, '') }) )
                    return { tipo ,cotizacion };});
     //console.log(dataBlue2);
-    
+    */
     //DOLAR OFICIAL
     await page.goto('https://dolarhoy.com/i/cotizaciones/dolar-bancos-y-casas-de-cambio')
     let dataOficial = await page.$$eval('p', (elements) => (
@@ -69,7 +69,8 @@ app.get('/Cotizaciones', async (req, res) => {
             return { dolar, operacion, valor }
         })
     ))
-    
+
+    /*
     //DOLAR BITCOIN
     await page.goto('https://dolarhoy.com/i/cotizaciones/bitcoin-usd')
     let dataBitcoin = await page.$$eval('p', (elements) => (
@@ -80,7 +81,8 @@ app.get('/Cotizaciones', async (req, res) => {
             return { dolar, operacion, valor }
         })
     ))
-    
+    */
+
     //DOLAR BANCO NACION (Solidario)
     await page.goto('https://dolarhoy.com/i/cotizaciones/banco-nacion')
     let dataBancoNacion = await page.$$eval('p', (elements) => (
@@ -97,7 +99,7 @@ app.get('/Cotizaciones', async (req, res) => {
                   ...dataMep,
                   ...dataCcl,
                //   ...dataBitcoin,
-               //   ...dataBancoNacion,
+                  ...dataBancoNacion,
     ]
      
 
