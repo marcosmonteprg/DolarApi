@@ -25,18 +25,8 @@ app.get('/Cotizaciones', async (req, res) => {
             const valor = element.textContent.replace(/[^\d.-]/g, '')
             return { dolar, operacion, valor }
         })
-    ))
-    
-    //DOLAR BLUE ALTERNATIVA
-  /*  await page.goto('https://dolarhoy.com/i/cotizaciones/dolar-blue');    
-    const dataBlue2 = await page.evaluate(() => 
-                {  let tipo         = document.querySelector("h2").innerText;         
-                   const valores    = document.querySelectorAll("p") //Todos los p
-                   const cotizacion = [...valores].map( (x,indice) => (  { tcambio : indice == 0 ? "C" : "V" , 
-                                                                           valor   : x.innerText.replace(/[^\d.-]/g, '') }) )
-                   return { tipo ,cotizacion };});
-    //console.log(dataBlue2);
-    */
+    ))    
+
     //DOLAR OFICIAL
     await page.goto('https://dolarhoy.com/i/cotizaciones/dolar-bancos-y-casas-de-cambio')
     let dataOficial = await page.$$eval('p', (elements) => (
@@ -97,13 +87,9 @@ app.get('/Cotizaciones', async (req, res) => {
     let salida = [...dataBlue,
                   ...dataOficial,
                   ...dataMep,
-                  ...dataCcl,
-               //   ...dataBitcoin,
-                  ...dataBancoNacion,
-    ]
-     
-
-
+                  ...dataCcl,               
+                  ...dataBancoNacion, ]
+    
     const pivotData = salida.reduce((acc, { dolar, operacion, valor }) => {
         if (!acc[dolar]) {
           acc[dolar] = { dolar };
