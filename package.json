@@ -6,7 +6,7 @@
   "scripts": {
       "start": "node index.js",
   "test": "echo \"Error: no test specified\" && exist 1",
-     "postinstall": "npx playwright install chromium"  
+     "postinstall": "npx playwright install"  
   },
   "keywords": [],
   "author": "",
